@@ -13,5 +13,16 @@ fn main() {
             }),
             FrameTimeDiagnosticsPlugin,
         ))
+        .add_systems(Startup, setup_camera2d)
         .run();
+}
+
+fn setup_camera2d(mut commands: Commands) {
+    commands.spawn(Camera2dBundle {
+        transform: Transform {
+            translation: Vec3::new(0.0, 0.0, 0.0),
+            ..Default::default()
+        },
+        ..Default::default()
+    });
 }
