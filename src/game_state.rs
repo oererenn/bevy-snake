@@ -25,13 +25,10 @@ fn game_state_system(
         match state.get() {
             GameState::InGame => {
                 next_state.set(GameState::Paused);
-                info(format!("Game Paused"));
             }
             GameState::Paused => {
                 next_state.set(GameState::InGame);
-                info(format!("Game Resumed"));
             }
         }
-        info(state.get());
     }
 }
