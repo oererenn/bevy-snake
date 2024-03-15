@@ -100,7 +100,7 @@ fn reset_game(
 
 fn score_update_system(mut query: Query<&mut Text, With<ScoreText>>, score: ResMut<Score>) {
     for mut text in &mut query {
-        text.sections[1].value = format!("{}", score.0.to_string());
+        text.sections[1].value = format!("{}", score.0);
     }
 }
 
@@ -120,7 +120,7 @@ fn click_reset_button(
     mut snake_speed: ResMut<SnakeSpeed>,
     mut audio_played: ResMut<GameOverAudioPlayed>,
 ) {
-    for (interaction, mut color, mut border_color, children) in &mut interaction_query {
+    for (interaction, _color, _border_color, _children) in &mut interaction_query {
         if interaction == &Interaction::Pressed {
             info!("Button pressed");
             let mut reset_button = reset_button_query.single_mut();

@@ -1,14 +1,6 @@
-use bevy::{
-    prelude::*,
-    sprite::{MaterialMesh2dBundle, Mesh2dHandle},
-    utils::info,
-};
+use bevy::prelude::*;
 
-use crate::{
-    coin::Coin,
-    game_state::GameState,
-    snake::{SnakeHead, SnakeSegment, SnakeSegments},
-};
+use crate::{coin::Coin, snake::SnakeHead};
 
 pub struct EventPlugin;
 

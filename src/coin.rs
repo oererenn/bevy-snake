@@ -1,11 +1,8 @@
-use std::time::Duration;
-
 use bevy::{
-    diagnostic::{DiagnosticsStore, FrameTimeDiagnosticsPlugin},
     prelude::*,
     sprite::{MaterialMesh2dBundle, Mesh2dHandle},
 };
-use rand::{distributions::Uniform, prelude::*};
+use rand::prelude::*;
 
 use crate::game_state::GameState;
 
@@ -38,7 +35,7 @@ fn spawn_coin(
     }
     if coin_timer.0.tick(time.delta()).finished() {
         let window = windows.single_mut();
-        let window_size = Vec2::new(window.width() as f32, window.height() as f32);
+        let window_size = Vec2::new(window.width(), window.height());
         let offset = 30.0;
 
         let mut rng = thread_rng();

@@ -1,17 +1,11 @@
-use std::sync::Once;
-
 use bevy::{
-    ecs::event,
     prelude::*,
     sprite::{MaterialMesh2dBundle, Mesh2dHandle},
-    transform::commands,
 };
 
 use crate::{
-    coin::Coin,
     event::{GameOverEvent, SnakeCollideEvent},
     game_state::{GameState, Score},
-    snake,
 };
 pub struct SnakePlugin;
 
@@ -105,7 +99,7 @@ fn snake_head_movement(
     if state.get() != &GameState::InGame {
         return;
     }
-    for (mut transform, entity) in query.iter_mut() {
+    for (mut transform, _entity) in query.iter_mut() {
         let snake_pos = Vec2::new(transform.translation.x, transform.translation.y);
         let mouse_pos = Vec2::new(mouse_position.x, mouse_position.y);
         if (mouse_pos - snake_pos).length() > 1.0 {
@@ -185,7 +179,7 @@ fn move_snake_segments(
         previous_rotation = head_transform.rotation;
     }
     let base_lerp_factor = 10.0 * time.delta_seconds();
-    let mut lerp_factor = base_lerp_factor + (snake_speed.0 * 0.0003);
+    let lerp_factor = base_lerp_factor + (snake_speed.0 * 0.0003);
 
     for segment in segments.0.iter().skip(1) {
         if let Ok(mut transform) = transforms.get_mut(*segment) {
@@ -202,17 +196,17 @@ fn move_snake_segments(
 }
 
 fn check_snake_self_collision(
-    mut commands: Commands,
+    _commands: Commands,
     head_query: Query<&Transform, With<SnakeHead>>,
     segment_query: Query<(Entity, &Transform, &SnakeSegment), Without<SnakeHead>>,
     mut game_over_event: EventWriter<GameOverEvent>,
-    mut next_state: ResMut<NextState<GameState>>,
+    _next_state: ResMut<NextState<GameState>>,
 ) {
     if let Ok(head_transform) = head_query.get_single() {
         let head_position = head_transform.translation.truncate();
         let snake_radius = 10.0;
 
-        for (segment_entity, segment_transform, segment) in segment_query.iter() {
+        for (_segment_entity, segment_transform, segment) in segment_query.iter() {
             if segment.ignore_collision {
                 continue;
             }

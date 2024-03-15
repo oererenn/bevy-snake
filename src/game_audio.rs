@@ -1,7 +1,4 @@
-use bevy::{
-    diagnostic::{DiagnosticsStore, FrameTimeDiagnosticsPlugin},
-    prelude::*,
-};
+use bevy::prelude::*;
 
 use crate::event::{CoinCollectedEvent, GameOverEvent};
 
