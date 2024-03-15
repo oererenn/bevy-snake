@@ -2,6 +2,8 @@
 
 A classic snake game built with [Bevy](https://bevyengine.org), a refreshingly simple data-driven game engine built in Rust.
 
+![Bevy Snake Game Screenshot](assets/snake_image.png)
+
 ## Some Features
 
 - **Smooth Snake Movement:** Control the snake using your mouse.
